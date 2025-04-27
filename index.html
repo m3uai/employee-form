@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نموذج الإجراء الذاتية عند تعيين الموظف</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+      (function() {
+        emailjs.init({
+          publicKey: "usoVToWfmm0w7VpDf"
+        });
+      })();
+    </script>
+
     <style>
         body {
             font-family: 'Tajawal', sans-serif;
@@ -56,61 +66,61 @@
 <body>
     <div class="container">
         <h1>نموذج الإجراء الذاتية عند تعيين الموظف</h1>
-        <form>
+        <form id="job-form">
             <label>الاسم الكامل</label>
-            <input type="text" required>
+            <input type="text" name="fullName" required>
 
             <label>رقم الهوية / الإقامة</label>
-            <input type="text" required>
+            <input type="text" name="idNumber" required>
 
             <label>الجنسية</label>
-            <input type="text" required>
+            <input type="text" name="nationality" required>
 
             <label>الجنس</label>
-            <select required>
+            <select name="gender" required>
                 <option value="">اختر</option>
                 <option>ذكر</option>
                 <option>أنثى</option>
             </select>
 
             <label>تاريخ الميلاد</label>
-            <input type="date" required>
+            <input type="date" name="birthDate" required>
 
             <label>الحالة الاجتماعية</label>
-            <input type="text">
+            <input type="text" name="maritalStatus">
 
             <label>عدد الأبناء</label>
-            <input type="number">
+            <input type="number" name="children">
 
             <label>العنوان الوطني</label>
-            <input type="text">
+            <input type="text" name="address">
 
             <label>رقم الجوال</label>
-            <input type="tel" required>
+            <input type="tel" name="mobile" required>
 
             <label>البريد الإلكتروني</label>
-            <input type="email" required>
+            <input type="email" name="email" required>
 
             <label>رقم هاتف بديل</label>
-            <input type="tel">
+            <input type="tel" name="altPhone">
 
             <label>المسمى الوظيفي</label>
-            <input type="text">
+            <input type="text" name="jobTitle">
 
             <label>القسم / الإدارة</label>
-            <input type="text">
+            <input type="text" name="department">
 
             <label>المدير المباشر</label>
-            <input type="text">
+            <input type="text" name="manager">
 
             <label>مكان العمل</label>
-            <input type="text">
+            <input type="text" name="workLocation">
 
             <label>تاريخ التعيين</label>
-            <input type="date">
+            <input type="date" name="hireDate">
 
             <label>نوع العقد</label>
-            <select>
+            <select name="contractType">
                 <option value="">اختر</option>
                 <option>دوام كامل</option>
                 <option>دوام جزئي</option>
@@ -118,40 +128,56 @@
             </select>
 
             <label>فترة التجربة</label>
-            <input type="text">
+            <input type="text" name="probationPeriod">
 
             <label>آخر مؤهل علمي</label>
-            <input type="text">
+            <input type="text" name="lastDegree">
 
             <label>اسم الجامعة / المعهد</label>
-            <input type="text">
+            <input type="text" name="university">
 
             <label>التخصص</label>
-            <input type="text">
+            <input type="text" name="specialization">
 
             <label>سنة التخرج</label>
-            <input type="number">
+            <input type="number" name="graduationYear">
 
             <label>الخبرات السابقة</label>
-            <textarea rows="3"></textarea>
+            <textarea name="experience" rows="3"></textarea>
 
             <label>الدورات التدريبية أو المهارات الخاصة</label>
-            <textarea rows="3"></textarea>
+            <textarea name="skills" rows="3"></textarea>
 
             <label>اسم البنك</label>
-            <input type="text">
+            <input type="text" name="bankName">
 
             <label>رقم الآيبان</label>
-            <input type="text">
+            <input type="text" name="iban">
 
             <label>الوثائق المرفقة</label>
-            <textarea rows="3"></textarea>
+            <textarea name="attachments" rows="3"></textarea>
 
             <label>الإقرار بصحة البيانات</label>
-            <input type="checkbox"> أقر أن جميع البيانات أعلاه صحيحة.
+            <input type="checkbox" name="confirmation" value="تم الإقرار"> أقر أن جميع البيانات أعلاه صحيحة.
 
             <button type="submit">إرسال</button>
         </form>
     </div>
+
+    <script>
+        document.getElementById("job-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            emailjs.sendForm("service_yvck4ro", "template_9autwrr", this)
+                .then(function(response) {
+                    alert("تم إرسال النموذج بنجاح!");
+                    document.getElementById("job-form").reset();
+                }, function(error) {
+                    alert("حدث خطأ أثناء الإرسال. الرجاء المحاولة مرة أخرى.");
+                    console.error("خطأ:", error);
+                });
+        });
+    </script>
 </body>
 </html>
+
