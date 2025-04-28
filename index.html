@@ -142,20 +142,32 @@
             <label>سنة التخرج</label>
             <input type="number" name="graduationYear">
 
+            <!-- الخبرات السابقة -->
             <label>الخبرات السابقة</label>
-            <textarea name="experience" rows="3"></textarea>
+            <select name="hasExperience" id="hasExperience" onchange="toggleField('hasExperience', 'experienceField')">
+                <option value="">اختر</option>
+                <option value="yes">يوجد</option>
+                <option value="no">لا يوجد</option>
+            </select>
+            <textarea name="experience" id="experienceField" rows="3" style="display:none;" placeholder="يرجى كتابة الخبرات السابقة هنا"></textarea>
 
+            <!-- الدورات التدريبية أو المهارات الخاصة -->
             <label>الدورات التدريبية أو المهارات الخاصة</label>
-            <textarea name="skills" rows="3"></textarea>
+            <select name="hasSkills" id="hasSkills" onchange="toggleField('hasSkills', 'skillsField')">
+                <option value="">اختر</option>
+                <option value="yes">يوجد</option>
+                <option value="no">لا يوجد</option>
+            </select>
+            <textarea name="skills" id="skillsField" rows="3" style="display:none;" placeholder="يرجى كتابة الدورات أو المهارات هنا"></textarea>
 
-            <label>اسم البنك</label>
-            <input type="text" name="bankName">
-
-            <label>رقم الآيبان</label>
-            <input type="text" name="iban">
-
+            <!-- الوثائق المرفقة -->
             <label>الوثائق المرفقة</label>
-            <textarea name="attachments" rows="3"></textarea>
+            <select name="hasAttachments" id="hasAttachments" onchange="toggleField('hasAttachments', 'attachmentsField')">
+                <option value="">اختر</option>
+                <option value="yes">يوجد</option>
+                <option value="no">لا يوجد</option>
+            </select>
+            <textarea name="attachments" id="attachmentsField" rows="3" style="display:none;" placeholder="يرجى كتابة الوثائق المرفقة هنا"></textarea>
 
             <label>الإقرار بصحة البيانات</label>
             <input type="checkbox" name="confirmation" value="تم الإقرار"> أقر أن جميع البيانات أعلاه صحيحة.
@@ -165,6 +177,7 @@
     </div>
 
     <script>
+        // كود إرسال الإيميل
         document.getElementById("job-form").addEventListener("submit", function(event) {
             event.preventDefault();
 
@@ -177,7 +190,19 @@
                     console.error("خطأ:", error);
                 });
         });
+
+        // كود إظهار وإخفاء الحقول حسب الاختيار
+        function toggleField(selectId, fieldId) {
+            var select = document.getElementById(selectId);
+            var field = document.getElementById(fieldId);
+
+            if (select.value === "yes") {
+                field.style.display = "block";
+            } else {
+                field.style.display = "none";
+                field.value = "";
+            }
+        }
     </script>
 </body>
 </html>
-
