@@ -1,208 +1,209 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نموذج الإجراء الذاتية عند تعيين الموظف</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نموذج الإجراء الذاتية عند تعيين الموظف</title>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script>
-      (function() {
-        emailjs.init({
-          publicKey: "usoVToWfmm0w7VpDf"
-        });
-      })();
-    </script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function() {
+      emailjs.init({
+        publicKey: "usoVToWfmm0w7VpDf"
+      });
+    })();
+  </script>
 
-    <style>
-        body {
-            font-family: 'Tajawal', sans-serif;
-            background-color: #f4f6f8;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            background: #fff;
-            border-radius: 10px;
-            padding: 30px;
-            max-width: 800px;
-            margin: auto;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        label {
-            display: block;
-            margin-top: 15px;
-            font-weight: bold;
-            color: #555;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            margin-top: 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            font-size: 16px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-    </style>
+  <style>
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background: #fff;
+      border-radius: 10px;
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #555;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px 20px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>نموذج الإجراء الذاتية عند تعيين الموظف</h1>
-        <form id="job-form">
-            <label>الاسم الكامل</label>
-            <input type="text" name="fullName" required>
+  <div class="container">
+    <h1>نموذج الإجراء الذاتية عند تعيين الموظف</h1>
+    <form id="job-form">
 
-            <label>رقم الهوية / الإقامة</label>
-            <input type="text" name="idNumber" required>
+      <label>الاسم الكامل</label>
+      <input type="text" name="fullName" required>
 
-            <label>الجنسية</label>
-            <input type="text" name="nationality" required>
+      <label>رقم الهوية / الإقامة</label>
+      <input type="text" name="idNumber" required>
 
-            <label>الجنس</label>
-            <select name="gender" required>
-                <option value="">اختر</option>
-                <option>ذكر</option>
-                <option>أنثى</option>
-            </select>
+      <label>الجنسية</label>
+      <input type="text" name="nationality" required>
 
-            <label>تاريخ الميلاد</label>
-            <input type="date" name="birthDate" required>
+      <label>الجنس</label>
+      <select name="gender" required>
+        <option value="">اختر</option>
+        <option>ذكر</option>
+        <option>أنثى</option>
+      </select>
 
-            <label>الحالة الاجتماعية</label>
-            <input type="text" name="maritalStatus">
+      <label>تاريخ الميلاد</label>
+      <input type="date" name="birthDate" required>
 
-            <label>عدد الأبناء</label>
-            <input type="number" name="children">
+      <label>الحالة الاجتماعية</label>
+      <input type="text" name="maritalStatus">
 
-            <label>العنوان الوطني</label>
-            <input type="text" name="address">
+      <!-- عدد الأبناء: يوجد/لا يوجد -->
+      <label>عدد الأبناء</label>
+      <select name="hasChildren" id="hasChildren" onchange="toggleChildrenInput()">
+        <option value="">اختر</option>
+        <option value="يوجد">يوجد</option>
+        <option value="لا يوجد">لا يوجد</option>
+      </select>
 
-            <label>رقم الجوال</label>
-            <input type="tel" name="mobile" required>
+      <div id="childrenCountDiv" style="display: none;">
+        <label>كم عدد الأبناء؟</label>
+        <input type="number" name="childrenCount" min="0">
+      </div>
 
-            <label>البريد الإلكتروني</label>
-            <input type="email" name="email" required>
+      <label>العنوان</label>
+      <input type="text" name="address">
 
-            <label>رقم هاتف بديل</label>
-            <input type="tel" name="altPhone">
+      <label>رقم الجوال</label>
+      <input type="tel" name="mobile" required>
 
-            <label>المسمى الوظيفي</label>
-            <input type="text" name="jobTitle">
+      <label>البريد الإلكتروني</label>
+      <input type="email" name="email" required>
 
-            <label>القسم / الإدارة</label>
-            <input type="text" name="department">
+      <label>رقم هاتف بديل</label>
+      <input type="tel" name="altPhone">
 
-            <label>المدير المباشر</label>
-            <input type="text" name="manager">
+      <label>المسمى الوظيفي</label>
+      <input type="text" name="jobTitle">
 
-            <label>مكان العمل</label>
-            <input type="text" name="workLocation">
+      <label>القسم / الإدارة</label>
+      <input type="text" name="department">
 
-            <label>تاريخ التعيين</label>
-            <input type="date" name="hireDate">
+      <label>المدير المباشر</label>
+      <input type="text" name="manager">
 
-            <label>نوع العقد</label>
-            <select name="contractType">
-                <option value="">اختر</option>
-                <option>دوام كامل</option>
-                <option>دوام جزئي</option>
-                <option>مؤقت</option>
-            </select>
+      <label>مكان العمل</label>
+      <input type="text" name="workLocation">
 
-            <label>فترة التجربة</label>
-            <input type="text" name="probationPeriod">
+      <label>تاريخ التعيين</label>
+      <input type="date" name="hireDate">
 
-            <label>آخر مؤهل علمي</label>
-            <input type="text" name="lastDegree">
+      <label>نوع العقد</label>
+      <select name="contractType">
+        <option value="">اختر</option>
+        <option>دوام كامل</option>
+        <option>دوام جزئي</option>
+        <option>مؤقت</option>
+      </select>
 
-            <label>اسم الجامعة / المعهد</label>
-            <input type="text" name="university">
+      <label>فترة التجربة</label>
+      <input type="text" name="probationPeriod">
 
-            <label>التخصص</label>
-            <input type="text" name="specialization">
+      <label>آخر مؤهل علمي</label>
+      <input type="text" name="lastDegree">
 
-            <label>سنة التخرج</label>
-            <input type="number" name="graduationYear">
+      <label>اسم الجامعة / المعهد</label>
+      <input type="text" name="university">
 
-            <!-- الخبرات السابقة -->
-            <label>الخبرات السابقة</label>
-            <select name="hasExperience" id="hasExperience" onchange="toggleField('hasExperience', 'experienceField')">
-                <option value="">اختر</option>
-                <option value="yes">يوجد</option>
-                <option value="no">لا يوجد</option>
-            </select>
-            <textarea name="experience" id="experienceField" rows="3" style="display:none;" placeholder="يرجى كتابة الخبرات السابقة هنا"></textarea>
+      <label>التخصص</label>
+      <input type="text" name="specialization">
 
-            <!-- الدورات التدريبية أو المهارات الخاصة -->
-            <label>الدورات التدريبية أو المهارات الخاصة</label>
-            <select name="hasSkills" id="hasSkills" onchange="toggleField('hasSkills', 'skillsField')">
-                <option value="">اختر</option>
-                <option value="yes">يوجد</option>
-                <option value="no">لا يوجد</option>
-            </select>
-            <textarea name="skills" id="skillsField" rows="3" style="display:none;" placeholder="يرجى كتابة الدورات أو المهارات هنا"></textarea>
+      <label>سنة التخرج</label>
+      <input type="number" name="graduationYear">
 
-            <!-- الوثائق المرفقة -->
-            <label>الوثائق المرفقة</label>
-            <select name="hasAttachments" id="hasAttachments" onchange="toggleField('hasAttachments', 'attachmentsField')">
-                <option value="">اختر</option>
-                <option value="yes">يوجد</option>
-                <option value="no">لا يوجد</option>
-            </select>
-            <textarea name="attachments" id="attachmentsField" rows="3" style="display:none;" placeholder="يرجى كتابة الوثائق المرفقة هنا"></textarea>
+      <label>الخبرات السابقة</label>
+      <textarea name="experience" rows="3"></textarea>
 
-            <label>الإقرار بصحة البيانات</label>
-            <input type="checkbox" name="confirmation" value="تم الإقرار"> أقر أن جميع البيانات أعلاه صحيحة.
+      <label>الدورات التدريبية أو المهارات الخاصة</label>
+      <textarea name="skills" rows="3"></textarea>
 
-            <button type="submit">إرسال</button>
-        </form>
-    </div>
+      <label>اسم البنك</label>
+      <input type="text" name="bankName">
 
-    <script>
-        // كود إرسال الإيميل
-        document.getElementById("job-form").addEventListener("submit", function(event) {
-            event.preventDefault();
+      <label>رقم الآيبان</label>
+      <input type="text" name="iban">
 
-            emailjs.sendForm("service_yvck4ro", "template_9autwrr", this)
-                .then(function(response) {
-                    alert("تم إرسال النموذج بنجاح!");
-                    document.getElementById("job-form").reset();
-                }, function(error) {
-                    alert("حدث خطأ أثناء الإرسال. الرجاء المحاولة مرة أخرى.");
-                    console.error("خطأ:", error);
-                });
+      <label>الوثائق المرفقة</label>
+      <textarea name="attachments" rows="3"></textarea>
+
+      <label>الإقرار بصحة البيانات</label>
+      <input type="checkbox" name="confirmation" value="تم الإقرار"> أقر أن جميع البيانات أعلاه صحيحة.
+
+      <button type="submit">إرسال</button>
+
+    </form>
+  </div>
+
+  <script>
+    // تحكم في ظهور خانة عدد الأبناء
+    function toggleChildrenInput() {
+      var select = document.getElementById("hasChildren");
+      var childrenDiv = document.getElementById("childrenCountDiv");
+      if (select.value === "يوجد") {
+        childrenDiv.style.display = "block";
+      } else {
+        childrenDiv.style.display = "none";
+      }
+    }
+
+    // إرسال النموذج عبر EmailJS
+    document.getElementById("job-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      emailjs.sendForm("service_yvck4ro", "template_9autwrr", this)
+        .then(function(response) {
+          alert("تم إرسال النموذج بنجاح!");
+          document.getElementById("job-form").reset();
+          toggleChildrenInput(); // نخفي حقل عدد الأبناء بعد الإرسال
+        }, function(error) {
+          alert("حدث خطأ أثناء الإرسال. الرجاء المحاولة مرة أخرى.");
+          console.error("خطأ:", error);
         });
+    });
+  </script>
 
-        // كود إظهار وإخفاء الحقول حسب الاختيار
-        function toggleField(selectId, fieldId) {
-            var select = document.getElementById(selectId);
-            var field = document.getElementById(fieldId);
-
-            if (select.value === "yes") {
-                field.style.display = "block";
-            } else {
-                field.style.display = "none";
-                field.value = "";
-            }
-        }
-    </script>
 </body>
 </html>
